@@ -1,0 +1,20 @@
+
+{% extends "base.html" %}
+
+{% block title %}Inicio - My Website{% endblock %}
+
+
+{% block header %}
+<h1>Creaccion de posteo</h1>
+{% endblock %}
+    
+{% block content %}
+
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Postear">
+    </form>
+
+{% endblock %}

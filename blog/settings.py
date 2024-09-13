@@ -69,6 +69,9 @@ TEMPLATES = [
     },
 ]
 
+# Configura la ubicación de los archivos estáticos
+STATIC_URL = '/static/'
+
 WSGI_APPLICATION = 'blog.wsgi.application'
 
 

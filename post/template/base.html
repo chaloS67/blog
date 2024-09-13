@@ -2,13 +2,17 @@
 <html lang="en"><head>
 <meta charset="UTF-8">
 <title>{% block title %}My Website{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
 </head>
     <body>
         <header>
             <h1>{% block header %}Welcome to My Website{% endblock %}</h1>
         </header>
     <div class="content">
-    {% block content %}{% endblock %}
+    {% block content %}
+    
+    {% endblock %}
     </div>
     <footer>
     <p>&copy; 2024 My Website</p>
