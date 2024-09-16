@@ -7,8 +7,17 @@
 </head>
     <body>
         <header>
+            {% if user.is_authenticated %}
+                <p> hola {{user.username}} </p>
+                <a href="{% url 'logout' %}"> salir </a>
+            {% else %} 
+                <p> No se encuentra loggeado/a</p>
+                <a href="{% url 'login' %}">Iniciar sesión</a>
+            {% endif %}
+
             <h1>{% block header %}Welcome to My Website{% endblock %}</h1>
         </header>
+        {% include "navbar.html" %}
     <div class="content">
     {% block content %}
     

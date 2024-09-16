@@ -18,9 +18,14 @@ from django.contrib import admin
 from django.urls import include, path
 
 import post
+from post.views import RegistroUsuario
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('post.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-]
+    path('registro/', RegistroUsuario.as_view(), name='registro')
+    ]
+    
