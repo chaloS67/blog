@@ -10,5 +10,17 @@
 
 {% block content %}
 
-
+    <h1>Lista de Posteos</h1>
+    <ul>
+        {% for posteos in posteo %}
+            <li>
+                <strong>{{ posteo.titulo }}</strong><br>
+                {{ posteo.contenido }}<br>
+                <small>Publicado por {{ posteo.autor.username }} el {{ posteo.fecha }}</small>
+            </li>
+        {% empty %}
+            <li>No hay posteos disponibles.</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
+
