@@ -1,38 +1,53 @@
 
-from django.views.generic.list import ListView
+from django.views.generic import ListView
+from django.views.generic import CreateView
+from django.views.generic import DeleteView
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
-import post
+from .forms import PostForm
 from post.models import Post
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 def home_view(request):
-    posteo = Post.objects.all()
+    post = Post.objects.all()
     return render(request,'home.html',{post: post})
 
 class CrearPost(LoginRequiredMixin,CreateView):
 
-    model = Post
-    fields = ['titulo','contenido']
+    form_class = PostForm
     template_name = 'crear_post.html'
     success_url= reverse_lazy ('home')
 
 def form_valid(self, form):
-        form.instance.autor = self.request.user  # Establecer el usuario actual como el autor
-        return super().form_valid(form)
+            post = form.save(commit=False)
+            post.autor = self.request.user
+            post.save()
+            return super().form_valid(form)
 
+class ListarPost(ListView):
+    model = Post
+    context_object_name = 'posts'  # Nombre del contexto en la plantilla
+    template_name = 'listar_post.html'  # Nombre de la plantilla
+
+    def get_queryset(self):
+        # Filtra los posts del usuario autenticado
+        return Post.objects.filter(autor=self.request.user)
 
 class RegistroUsuario(CreateView):
     template_name = 'registro.html'  
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
 
-class PosteoListView(ListView):
+
+class EliminarPost(LoginRequiredMixin, DeleteView):
     model = Post
-    context_object_name = 'post'  # Nombre del contexto en la plantilla
+    template_name ='eliminar_post.html'
+    success_url = reverse_lazy('listar_post')
+
+
+
 
 
 

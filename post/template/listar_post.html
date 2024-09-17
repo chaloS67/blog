@@ -1,0 +1,20 @@
+{% extends 'base.html' %}  <!-- Asegúrate de estar heredando de la plantilla base -->
+
+{% block header %}
+<h1>Listado de Posts</h1>
+{% endblock %}
+
+{% block content %}
+    <ul>
+        {% for post in posts %}
+            <li>
+                <h2>{{ post.titulo }}</h2>
+                <p>{{ post.contenido }}</p>
+                <p><small>Publicado el {{ post.fecha }}</small></p>
+                <a href="{% url 'eliminar_post' post.pk %}" >Eliminar</a>
+            </li>
+        {% empty %}
+            <p>No hay posts disponibles.</p>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,20 +1,14 @@
+{% extends 'base.html' %}
 
-{% extends "base.html" %}
-
-{% block title %}Inicio - My Website{% endblock %}
-
-
-{% block header %}
-<h1>Creaccion de posteo</h1>
-{% endblock %}
-    
 {% block content %}
+  <h2>Crear Nuevo Post</h2>
 
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- Muestra el formulario con los campos de título y contenido -->
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Save">
-    </form>
+    <button type="submit">Publicar</button>
+  </form>
 
+  <a href="{% url 'home' %}">Volver a la lista de posts</a>  <!-- Enlace opcional -->
 {% endblock %}
