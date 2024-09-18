@@ -9,9 +9,10 @@
         {% for post in posts %}
             <li>
                 <h2>{{ post.titulo }}</h2>
-                <p>{{ post.contenido }}</p>
                 <p><small>Publicado el {{ post.fecha }}</small></p>
-                <a href="{% url 'eliminar_post' post.pk %}" >Eliminar</a>
+                <a href="{% url 'eliminar_post' post.pk %}">Eliminar</a>
+                <a href="{% url 'detalle_post' post.pk %}">Detalle</a>
+                <a href="{% url 'editar_post' post.pk %}">Editar</a>
             </li>
         {% empty %}
             <p>No hay posts disponibles.</p>
