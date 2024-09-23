@@ -31,6 +31,10 @@ class ListarPost(ListView):
     context_object_name = 'posts'  # Nombre del contexto en la plantilla
     template_name = 'listar_post.html'  # Nombre de la plantilla
 
+    def get_queryset(self):
+        # Filtra los posts del usuario autenticado
+        return Post.objects.filter(autor=self.request.user)
+
 
 class RegistroUsuario(CreateView):
     template_name = 'registro.html'  
